@@ -8,7 +8,7 @@ RUN apk update \
   && tar zxf /tmp/nextdns.tar.gz -C /tmp/nextdns
 
 FROM arm64v8/alpine
-RUN apk add --no-cache ca-certificates && update-ca-certificates
+RUN apk add --no-cache ca-certificates
 COPY --from=builder /tmp/nextdns /opt/nextdns
 EXPOSE 53/tcp 53/udp
 ENTRYPOINT ["/opt/nextdns/nextdns","run", "-config-file", "/etc/nextdns/nextdns.conf"]
